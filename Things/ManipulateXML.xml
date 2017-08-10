@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities>
+    <Things>
+        <Thing description="Thing to test edit /create and manipulate xml Files. All functions supportet in Rhino javascript platform are supported.&#10;(E4x parser). Futher information and samples under http://wso2.com/project/mashup/0.2/docs/e4xquickstart.html." documentationContent="&lt;p&gt;&lt;a href=&quot;http://wso2.com/project/mashup/0.2/docs/e4xquickstart.html&quot; target=&quot;_blank&quot;&gt;http://wso2.com/project/mashup...&lt;/a&gt;&lt;/p&gt;" effectiveThingPackage="FileRepositoryThing" enabled="true" homeMashup="" identifier="" lastModifiedDate="2017-08-10T14:15:21.792+02:00" name="ManipulateXML" projectName="" published="false" tags="Temporary:Tests" thingTemplate="FileRepository" valueStream="ValStreamTemp">
+            <Owner name="Administrator" type="User"/>
+            <avatar/>
+            <DesignTimePermissions>
+                <Create/>
+                <Read/>
+                <Update/>
+                <Delete/>
+                <Metadata/>
+            </DesignTimePermissions>
+            <RunTimePermissions/>
+            <VisibilityPermissions>
+                <Visibility/>
+            </VisibilityPermissions>
+            <ConfigurationTables/>
+            <ThingShape>
+                <PropertyDefinitions>
+                    <PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeThreshold="0.0" aspect.dataChangeType="VALUE" aspect.isLogged="true" aspect.isPersistent="false" aspect.isReadOnly="false" baseType="NUMBER" category="" description="sdf" isLocalOnly="false" name="Humidity" ordinal="2"/>
+                    <PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeThreshold="0.0" aspect.dataChangeType="VALUE" aspect.isLogged="true" aspect.isPersistent="false" aspect.isReadOnly="false" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Temperature" ordinal="2"/>
+                </PropertyDefinitions>
+                <ServiceDefinitions>
+                    <ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="CreateXml">
+                        <ResultType baseType="STRING" description="Creates a new xml File with constant data from script" name="result" ordinal="0"/>
+                        <ParameterDefinitions/>
+                    </ServiceDefinition>
+                    <ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="EditXml">
+                        <ResultType baseType="NOTHING" description="Edit the XML File Edit.xml and saves the edited file in AfterEdit.xml" name="result" ordinal="0"/>
+                        <ParameterDefinitions/>
+                    </ServiceDefinition>
+                    <ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="LoadXml">
+                        <ResultType baseType="STRING" description="Loads the file Edit.xml and returns the data as string" name="result" ordinal="0"/>
+                        <ParameterDefinitions/>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions/>
+                <ServiceMappings/>
+                <ServiceImplementations>
+                    <ServiceImplementation description="" handlerName="Script" name="CreateXml">
+                        <ConfigurationTables>
+                            <ConfigurationTable description="Script" isMultiRow="false" name="Script" ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code><![CDATA[var servicename = "CreateXml";
+logger.info("Start " + servicename );
+try {
+    var params = {
+        path: "temp1.xml" /* STRING */
+    };
+    
+    // create new XML Object
+    var xml = new XML();
+    //xml = <>;
+    var node = <customer number="1721">
+            <name>
+                <first>John</first>
+                <last>Smith</last>
+            </name>
+            <phone type="mobile">888-555-1212</phone>
+            <phone type="office">888-555-2121</phone>
+            </customer>; 
+    xml = node;
+    xml.appendChild(node);
+    var result = xml.toString();
+
+    
+    var params = {
+        path: "XMLCreated.xml" /* STRING */,
+        content: xml /* XML */
+    };
+
+    me.SaveXML(params);
+	result = xml.toString();
+}
+
+catch(err) {
+    logger.error("Source: " + me.name + "; Servicename: "  + servicename + "; FatalError on line " + (err.lineNumber + 1) + ": " + err);
+}]]></code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation description="" handlerName="Script" name="EditXml">
+                        <ConfigurationTables>
+                            <ConfigurationTable description="Script" isMultiRow="false" name="Script" ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code><![CDATA[var servicename = "EditXml";
+logger.info("Start " + servicename );
+try {
+    var params = {
+        path: "Edit.xml" /* STRING */
+    };
+    
+    // result: XML
+    var xml = me.LoadXML(params);
+    //var result = xml.remote.ch[0].unit;
+   	//var result = xml.remote.ch.(@id == "1").unit.toString(); 
+    
+
+    var node = xml.remote.ch[0];
+    // two possibilities how to add nodes
+    xml.remote.ch += node;
+    xml.appendChild(node);
+
+    var params = {
+        path: "AfterEdit.xml" /* STRING */,
+        content: xml /* XML */
+    };
+
+    me.SaveXML(params);
+}
+
+catch(err) {
+    logger.error("Source: " + me.name + "; Servicename: "  + servicename + "; FatalError on line " + (err.lineNumber + 1) + ": " + err);
+}]]></code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation description="" handlerName="Script" name="LoadXml">
+                        <ConfigurationTables>
+                            <ConfigurationTable description="Script" isMultiRow="false" name="Script" ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code><![CDATA[
+var params = {
+	path: "Edit.xml" /* STRING */
+};
+
+// result: XML
+var xml = me.LoadXML(params);
+var result = xml.toString();
+
+]]></code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions/>
+            </ThingShape>
+            <PropertyBindings/>
+            <RemotePropertyBindings/>
+            <RemoteServiceBindings/>
+            <RemoteEventBindings/>
+            <AlertConfigurations>
+                <AlertDefinitions name="Humidity"/>
+                <AlertDefinitions name="Temperature"/>
+            </AlertConfigurations>
+            <ImplementedShapes/>
+            <ThingProperties/>
+            <ConfigurationChanges>
+                <ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2017-08-10T14:15:21.792+02:00" user="Administrator"/>
+            </ConfigurationChanges>
+        </Thing>
+    </Things>
+</Entities>
