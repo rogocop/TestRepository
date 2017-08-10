@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Entities>
     <Things>
-        <Thing description="Thing to test edit /create and manipulate xml Files. All functions supportet in Rhino javascript platform are supported.&#10;(E4x parser). Futher information and samples under http://wso2.com/project/mashup/0.2/docs/e4xquickstart.html." documentationContent="&lt;p&gt;&lt;a href=&quot;http://wso2.com/project/mashup/0.2/docs/e4xquickstart.html&quot; target=&quot;_blank&quot;&gt;http://wso2.com/project/mashup...&lt;/a&gt;&lt;/p&gt;" effectiveThingPackage="FileRepositoryThing" enabled="true" homeMashup="" identifier="" lastModifiedDate="2017-08-10T14:15:21.792+02:00" name="ManipulateXML" projectName="" published="false" tags="Temporary:Tests" thingTemplate="FileRepository" valueStream="ValStreamTemp">
+        <Thing description="Thingsdfsdfsdfsfsf to test edit /create and manipulate xml Files. All functions supportet in Rhino javascript platform are supported.&#10;(E4x parser). Futher information and samples under http://wso2.com/project/mashup/0.2/docs/e4xquickstart.html." documentationContent="&lt;p&gt;&lt;a href=&quot;http://wso2.com/project/mashup/0.2/docs/e4xquickstart.html&quot; target=&quot;_blank&quot;&gt;http://wso2.com/project/mashup...&lt;/a&gt;&lt;/p&gt;" effectiveThingPackage="FileRepositoryThing" enabled="true" homeMashup="" identifier="" lastModifiedDate="2017-08-10T14:15:21.792+02:00" name="ManipulateXML" projectName="" published="false" tags="Temporary:Tests" thingTemplate="FileRepository" valueStream="ValStreamTemp">
             <Owner name="Administrator" type="User"/>
             <avatar/>
             <DesignTimePermissions>
